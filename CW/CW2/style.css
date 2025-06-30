@@ -1,0 +1,51 @@
+p {  /*Needed to change the fount size to fit eveting perfectly*/
+  font-size: 12px;
+}
+
+/*The will make the header center*/
+header {
+  text-align: center;
+}
+
+/*Main function*/
+main {
+  width: 70%;
+  margin: 0 auto;
+  display: flex;
+}
+
+/*Column as*/
+.column {
+  padding: 2em;
+  margin: 2em;
+  border: 4px dashed red;
+  box-sizing: border-box;
+}
+
+aside.column {
+  flex-basis: 33%;
+}
+
+section.column {
+  flex-basis: 67%;
+}
+
+.float-right {
+  float: right;
+  width: 140px;
+}
+
+.clear {
+  clear: both;
+}
+
+.fixed {
+  position: fixed;
+  bottom: 5px;
+  left: 0;
+  width: 100%;
+  background-color: white;
+  padding: 5px;
+  box-sizing: border-box;
+  
+}
