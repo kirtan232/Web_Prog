@@ -1,0 +1,6 @@
+Exercise 1: Debugging Form - Challenge =
+https://codd.cs.gsu.edu/~kpatel315/WP/CW/CW3/formtest.html
+
+
+Exercises 2 to 5 =
+https://codd.cs.gsu.edu/~kpatel315/WP/CW/CW3_02/buyagrade.html

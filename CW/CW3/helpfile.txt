@@ -1,0 +1,17 @@
+The issue is the in the selection box as shown below
+if you select multiple option i.e (control and right click with mouse) to select more than one option. Now on submit  it only passes the last value. I explained in class video as well toward the end of class. 
+
+please remember to change the line to your file path location on your codd server
+<form action="https://codd.cs.gsu.edu/~lhenry23/test/FormCheckUP/formtest.php" method="post"> 
+
+Enjoy !!!!!! 
+
+Please select your optional features: 
+<select name="options[]" size="3" multiple> 
+<option>Chat 
+<option>Email 
+<option>File transfer 
+<option>Directory 
+<option>Shell 
+<option>Remote control 
+</select> 
