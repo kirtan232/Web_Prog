@@ -1,0 +1,46 @@
+body {
+  background-color: rgb(157, 216, 227);
+}
+
+img {
+  position: absolute;
+  top: 0; bottom:0; left: 0; right:0;
+  margin: auto;
+  border: 5px solid #555;
+  box-shadow: 12px 12px 12px rgba(19, 17, 17, 0.3);
+}
+
+.words {
+position: fixed;
+font-family: impact;
+font-size: 90px;
+}
+
+.first {
+  z-index: 2;
+  position: fixed;
+  margin: auto;
+  top: 250px; bottom:0; left: 730px; right:0;
+}
+
+.heart {
+  z-index: 2;
+  color: red;
+  font-size: 140px;
+
+  position: fixed;
+  top: 220px;
+  bottom: 0;
+  left: 760px;
+  width: 20px; 
+}
+
+.last {
+  z-index: 2;
+  position: fixed;
+  top: 350px;
+  bottom: 0;
+  left: 730px;
+  width: 20px; 
+
+}

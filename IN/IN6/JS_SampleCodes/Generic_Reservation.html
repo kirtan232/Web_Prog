@@ -1,0 +1,297 @@
+
+<html xmlns="http://www.w3.org/1999/xhtml"> 
+ <head>  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />  
+  <title>Reservation</title>  
+  <script language="JavaScript">
+  function validatedate(inputText)  
+  {  
+  var error="";
+  var dateformat = /^(0?[1-9]|[12][0-9]|3[01])[\/\-](0?[1-9]|1[012])[\/\-]\d{4}$/;  
+  // Match the date format through regular expression  
+  if(inputText.value.match(dateformat))  
+  {  
+  document.form1.text1.focus();  
+  //Test which seperator is used '/' or '-'  
+  var opera1 = inputText.value.split('/');  
+  var opera2 = inputText.value.split('-');  
+  lopera1 = opera1.length;  
+  lopera2 = opera2.length;  
+  // Extract the string into month, date and year  
+  if (lopera1>1)  
+  {  
+  var pdate = inputText.value.split('/');  
+  }  
+  else if (lopera2>1)  
+  {  
+  var pdate = inputText.value.split('-');  
+  }  
+  var dd = parseInt(pdate[0]);  
+  var mm  = parseInt(pdate[1]);  
+  var yy = parseInt(pdate[2]);  
+  // Create list of days of a month [assume there is no leap year by default]  
+  var ListofDays = [31,28,31,30,31,30,31,31,30,31,30,31];  
+  if (mm==1 || mm>2)  
+  {  
+  if (dd>ListofDays[mm-1])  
+  {  
+  inputText.style.background = 'Yellow';
+ error= "Invalid date format!";  
+  return error;  
+  }  
+  }  
+  if (mm==2)  
+  {  
+  var lyear = false;  
+  if ( (!(yy % 4) && yy % 100) || !(yy % 400))   
+  {  
+  lyear = true;  
+  }  
+  if ((lyear==false) && (dd>=29))  
+  {  
+  inputText.style.background = 'Yellow';
+  error= "Invalid date format!";   
+  return error;  
+  }  
+  if ((lyear==true) && (dd>29))  
+  {  
+  inputText.style.background = 'Yellow';
+  error= "Invalid date format!";  
+  return error;  
+  }  
+  }  
+  }  
+  else  
+  {  
+  inputText.style.background = 'Yellow';
+error= "Invalid date format!"; 
+ // document.form1.text1.focus();  
+  return error;  
+  }  
+  } 
+  
+  
+  
+  function validateEmpty(fld) {
+    var error = "";
+  
+    if (fld.value.length == 0) {
+        fld.style.background = 'Yellow'; 
+        error = "The required field has not been filled in.\n"
+    } else {
+        fld.style.background = 'White';
+    }
+	//alert (error);
+    return error;   
+}
+
+function validateUsername(fld) {
+    var error = "";
+    var illegalChars = /\W/; // allow letters, numbers, and underscores
+ 
+    if (fld.value == "") {
+        fld.style.background = 'Yellow'; 
+        error = "You didn't enter a username.\n";
+    } else if ((fld.value.length < 2) || (fld.value.length > 20)) {
+        fld.style.background = 'Yellow'; 
+        error = "The username is the wrong length.\n";
+    } else if (illegalChars.test(fld.value)) {
+        fld.style.background = 'Yellow'; 
+        error = "The username contains illegal characters.\n";
+    } else {
+        fld.style.background = 'White';
+    } 
+	//alert(error);
+    return error;
+}
+ 
+ 
+ 
+function trim(s)
+{
+  return s.replace(/^\s+|\s+$/, '');
+} 
+
+function validateEmail(fld) {
+    var error="";
+    var tfld = trim(fld.value);                        // value of field with whitespace trimmed off
+    var emailFilter = /^[^@]+@[^@.]+\.[^@]*\w\w$/ ;
+    var illegalChars= /[\(\)\<\>\,\;\:\\\"\[\]]/ ;
+    
+    if (fld.value == "") {
+        fld.style.background = 'Yellow';
+        error = "You didn't enter an email address.\n";
+    } else if (!emailFilter.test(tfld)) {              //test email for illegal characters
+        fld.style.background = 'Yellow';
+        error = "Please enter a valid email address.\n";
+    } else if (fld.value.match(illegalChars)) {
+        fld.style.background = 'Yellow';
+        error = "The email address contains illegal characters.\n";
+    } else {
+        fld.style.background = 'White';
+    }
+	//alert(error);
+    return error;
+}
+
+function validatePhone(fld) {
+    var error = "";
+    var stripped = fld.value.replace(/[\(\)\.\-\ ]/g, '');     
+
+   if (fld.value == "") {
+        error = "You didn't enter a phone number.\n";
+        fld.style.background = 'Yellow';
+    } else if (isNaN(parseInt(stripped))) {
+        error = "The phone number contains illegal characters.\n";
+        fld.style.background = 'Yellow';
+    } else if (!(stripped.length == 10)) {
+        error = "The phone number is the wrong length. Make sure you included an area code.\n";
+        fld.style.background = 'Yellow';
+    } 
+	//alert(error);
+    return error;
+}
+
+
+
+ 
+  function validateformcnt()
+  {
+			
+			var reason = "";
+
+		reason += validateUsername(theForm.field_2951);   /* First Name */
+		//alert("Inside Validate function");
+		reason += validateUsername(theForm.field_3287);   /* Last Name */
+		reason += validateEmail(theForm.field_3267);  /* Email */
+		reason += validatePhone(theForm.field_3293);     /* Cell Phone no */
+		reason += validateEmpty(theForm.field_1243);   /* Company Name */
+		reason += validateEmpty(theForm.field_3295);   /* Pick up Address */
+		reason += validateEmpty(theForm.field_3261);   /* Drop Off Address */
+		reason += validateEmpty(theForm.field_3299);   /* Airline & Flight Details */
+		reason += validatedate(theForm.field_3279);   /*   Pick up Date*/
+		reason += validateEmpty(theForm.field_3731);   /*  Pick up Time */
+		reason += validateEmpty(theForm.field_3981);   /*   Card holder Name Address*/
+		reason += validateEmpty(theForm.field_3973);   /*  Credit Card no */
+		reason += validatedate(theForm.field_3975);   /*   Expiration Date*/
+		reason += validateEmpty(theForm.field_3977);   /*  CVV */
+		reason += validateEmpty(theForm.field_3979);   /*  Credit Card  Billing Address */
+		
+      
+  if (reason != "") {
+   
+{   alert("Some fields need correction:\n" + reason);
+      document.theForm.action= "http://codd.cs.gsu.edu/~c43759/TEST/Form.php";
+		
+}
+	
+   
+  }
+  if ( is_null(reason) || is_blank(reason))
+    document.theForm.action= "http://codd.cs.gsu.edu/~c43759/TEST/Formchk.php";
+			
+  }
+   </script>
+ </head>  		
+ 	
+<body>  	   
+       
+				
+					<h3><span>Please Fill out the form below</span></h3>
+<form name="theForm"  method="post" enctype="multipart/form-data">
+<li> <label>First Name&nbsp;<sup>*</sup></label><span class="input"><input type="text" name="field_2951" ></span> </li>
+<li> <label>Last Name&nbsp;<sup>*</sup></label><span class="input"><input type="text" name="field_3287"></span> </li>
+<li> <label>Cell Phone number&nbsp;<sup>*</sup></label><span class="input"><input type="text" name="field_3293"></span> </li>
+<li> <label>e-mail&nbsp;<sup>*</sup></label><span class="input"><input type="text" name="field_3267"></span> </li>
+<li> <label>Company name</label><span class="input"><input type="text" name="field_1243"></span> </li>
+<li>
+	<label>Select Vehicle Type&nbsp;<sup>*</sup></label>
+	<span>
+		<select name="field_3271" class="custom-select required">
+						<option  value="Sedan Town Car">Sedan Town Car</option>
+						<option  value="SUV">SUV</option>
+						<option  value="Stretch Limousine">Stretch Limousine</option>
+					</select>
+	</span>
+</li>
+<li> <label>Pick Up Address (or Airport)&nbsp;<sup>*</sup></label><span class="input"><input type="text" name="field_3295"></span> </li>
+<li>  <label>Drop Off Address   (or Airport)&nbsp;<sup>*</sup></label><span class="input"><input type="text" name="field_3261"></span> </li>
+<li> 	<label>Airline &  Flight # &nbsp;<sup>*</sup></label><span class="input"><input type="text" name="field_3299"></span> </li>
+<li> 	<label>Number Of Passengers&nbsp;<sup>*</sup></label>
+	<span>
+		<select name="field_3739">
+						<option  value="1">1</option>
+						<option  value="2">2</option>
+						<option  value="3">3</option>
+						<option  value="4">4</option>
+						<option  value="5">5</option>
+						<option  value="6">6</option>
+						<option  value="other">other</option>
+					</select>
+	</span>
+</li>
+<li> <label>Pick-Up Date&nbsp;<sup>*</sup>:</label>  <span><input type="text"  name="field_3279"></span> </li>
+<li> <label>Pick up Time&nbsp;<sup>*</sup></label><span ><input type="text" name="field_3731"></span> </li>
+<li> <label>How Many pieces of Luggage ?&nbsp;<sup>*</sup></label>
+	<span>
+				<span >
+			<input   type="radio"  name="field_3291[]" value="1-3">
+			<label>1-3</label>
+		</span>
+				<span>
+			<input   type="radio" name="field_3291[]" value="4-6">
+			<label>4-6</label>
+		</span>
+			</span>
+</li>
+<li> <label>How did you hear about us?&nbsp;<sup>*</sup></label>
+	<span>
+		<select name="field_2959">
+						<option  value="Other...">Other...</option>
+						<option  value="Google">Google</option>
+						<option  value="Yelp">Yelp</option>
+						<option  value="Friend">Friend</option>
+					</select>
+	</span>
+</li>
+<li>
+	<label>Payment type&nbsp;<sup>*</sup></label>
+	<span>
+	
+			<input type="radio"  name="field_3281" value="Credit Card (All major credit cards accepted)">
+			<label>Credit Card (All major credit cards accepted)</label>
+		
+				<span>
+			<input   type="radio" name="field_3281" value="Cash (Still Need Credit Card For Booking)">
+			<label>Cash (Still Need Credit Card For Booking)</label>
+		</span>
+			</span>
+</li>
+<li>
+	<label>Credit Card Info&nbsp;<sup>*</sup></label>
+	<span>
+		<select name="field_3971">
+						<option  value="Visa">Visa</option>
+						<option  value="Master Card">Master Card</option>
+						<option  value="American Express">American Express</option>
+						<option  value="Discovery">Discovery</option>
+					</select>
+	</span>
+</li>
+<li> <label>Card Holders First And Last Name&nbsp;<sup>*</sup></label><span class="input"><input type="text" name="field_3981" ></span></li>
+<li>	<label>Credit Card Number&nbsp;<sup>*</sup></label><span class="input"><input type="text" name="field_3973" ></span></li>
+<li> <label>Expiration Date&nbsp;<sup>*</sup></label><span class="input"><input type="text" name="field_3975"></span> </li>
+<li> 	<label>CVV&nbsp;<sup>*</sup></label><span class="input"><input type="text" name="field_3977"></span> </li>
+<li> 	<label>Credit Card Billing Address&nbsp;<sup>*</sup></label>
+	<span>
+		<textarea name="field_3979" ></textarea>
+	</span>
+</li>
+<br><br>
+
+	<button type="btnsubmit" onClick="validateformcnt(this);">	Reserve my ride Now!	</button>
+	
+
+						</ul>
+</form>                              
+ </body> 
+ </html>

@@ -1,0 +1,62 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Login</title>
+<script type="text/javascript">
+function validate(form){
+    var userName = form.Username.value;
+    var password = form.Password.value;
+    var errors = [];
+ 
+    if (!checkLength(userName)) {
+        errors.push("You must enter a username.");
+    }
+ 
+    if (!checkLength(password)) {
+        errors.push("You must enter a password.");
+    }
+ 
+    if (errors.length > 0) {
+        reportErrors(errors);
+        return false;
+    }
+ 
+    return true;
+}
+ 
+function checkLength(text, min, max){
+    min = min || 1;
+    max = max || 10000;
+ 
+    if (text.length < min || text.length > max) {
+        return false;
+    }
+    return true;
+}
+ 
+function reportErrors(errors){
+    var msg = "There were some problems...\n";
+    var numError;
+    for (var i = 0; i<errors.length; i++) {
+        numError = i + 1;
+        msg += "\n" + numError + ". " + errors[i];
+    }
+    alert(msg);
+}
+</script>
+</head>
+<body>
+<h1>Login Form</h1>
+<form method="post" action="Process.html"
+                onsubmit="return validate(this);">
+ 
+    Username: <input type="text" name="Username" size="10"><br>
+    Password: <input type="password" name="Password" size="10"><br>
+ 
+    <input type="submit" value="Submit">
+    <input type="reset" value="Reset Form">
+    </p>
+</form>
+</body>
+</html>

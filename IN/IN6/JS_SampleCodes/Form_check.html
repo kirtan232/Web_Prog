@@ -1,0 +1,66 @@
+
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+
+
+<head>
+  <title>XHTML Form Example JS</title>
+
+  <script type="text/javascript" src="Form_check.js">
+  </script>
+
+  <style type="text/css">
+    .mandatory { color: red }
+  </style>
+</head>
+
+<body>
+<h3>Please view source and study this form <br/> This from will be your source to complete CW 08 </h3>
+<h1>Sign Up Now!</h1>
+<form action="http://codd.cs.gsu.edu/~lhenry/formtest.php"
+      method="post"
+      id="signup_form"
+      onreset="return window.confirm('Are you sure you want to clear the form?');"
+      onsubmit="return checkCompleteness();">
+<p>
+<span class="mandatory">*</span><label id="name_label" for="visitor_name">Your Name:</label>
+ <input id="visitor_name" name="visitor_name" type="text" /></p>
+<p>
+<span class="mandatory">*</span><label id="pass1_label" for="password1">Password:</label>
+ <input id="password1" name="password1" type="password" /></p>
+<p>
+<span class="mandatory">*</span><label id="pass2_label" for="password2">Confirm Password:</label>
+ <input id="password2" name="password2" type="password" /></p>
+<p>
+<span class="mandatory">*</span>
+ <input id="licenseOK" name="licenseOK" type="checkbox" />
+ <label id="licenseOK_label" for="licenseOK">I accept</label> the license conditions.</p>
+
+<p>
+Specify account type desired:
+<br />
+<input name="account_type" type="radio" value="basic" /> Basic ($25)
+<br />
+<input name="account_type" type="radio" value="standard" checked="checked" /> Standard ($50)
+<br />
+<input name="account_type" type="radio" value="deluxe" /> Deluxe ($100)
+<br />
+
+<p>
+Select your operating system:
+<select name="system">
+  <option selected="selected"> Windows</option>
+  <option> Mac</option>
+  <option> Unix</option>
+</select></p>
+
+<p>
+<input type="submit" value="Sign Up" />
+<input type="reset" /></p>
+</form>
+</body>
+</html>

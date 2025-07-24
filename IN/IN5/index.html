@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Tic-Tac-Toe</title>
+    <link rel="stylesheet" href="style.css" />
+    <script src="tictactoe.js" defer></script>
+  </head>
+  <body>
+    <h1>Tic-Tac-Toe</h1>
+
+    <div id="gameBoard">
+      <button></button>
+      <button></button>
+      <button></button>
+      <button></button>
+      <button></button>
+      <button></button>
+      <button></button>
+      <button></button>
+      <button></button>
+    </div>
+
+    <p id="turnInfo">TURN INFO</p>
+
+    <label for="difficulty">Difficulty:</label>
+    
+    <select id="difficulty">
+      <option value="easy">Easy (Random AI)</option>
+      <option value="hard" selected>Hard (Smart AI)</option>
+    </select>
+
+    <button id="newGameButton">New Game</button>
+  </body>
+</html>

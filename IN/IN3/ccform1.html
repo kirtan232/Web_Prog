@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>New User Signup</title>
+  <link rel="stylesheet" href="style.css">
+
+</head>
+<body>
+
+<form action="https://codd.cs.gsu.edu/~kpatel315/WP/IN/IN3/params.php" method="post">
+  <fieldset>
+    <legend>New User Signup</legend>
+    
+    <label class="heading" for="name">Name:</label>
+    <input type="text" name="name" id="name" required /> <br />
+
+    <label class="heading" for="address">Address:</label>
+    <input type="text" name="address" id="address" required /> <br />
+
+    Gender:<br> <br>
+    <input name="gender" type="radio" value="Male" checked> Male 
+
+    <input name="gender" type="radio" value="Female"> Female 
+
+    <input name="gender" type="radio" value="Other"> Other
+    <p> 
+  
+    Date of birth:  <br><input type="date" id="DOB" name="birthday" required>
+
+    <p> 
+    <label class="heading">Credit Card:</label>
+    <label><input type="radio" name="ccard" value="Visa" required /> Visa</label>
+    <label><input type="radio" name="ccard" value="MasterCard" /> MasterCard</label>
+    <br />
+
+    <input type="submit" value="Sign Up" />
+  </fieldset>
+</form>
+
+</body>
+</html>

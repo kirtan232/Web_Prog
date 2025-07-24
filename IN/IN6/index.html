@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>JavaScript Form Validation</title>
+<link rel="stylesheet" href="style.css">
+<script>
+// Display an error message
+function printError(elemId, hintMsg) {
+    document.getElementById(elemId).innerHTML = hintMsg;
+}
+
+// Validate form on submit
+function validateForm() {
+    var id = document.myForm.userID.value.trim();
+    var fname = document.myForm.firstName.value.trim();
+    var lname = document.myForm.lastName.value.trim();
+
+    // Error flags
+    var idErr = fnameErr = lnameErr = true;
+
+    // Validate ID
+    if (id === "") {
+        printError("idErr", "Please enter your ID");
+    } else {
+        printError("idErr", "");
+        idErr = false;
+    }
+
+    // Validate First Name
+    if (fname === "") {
+        printError("fnameErr", "Please enter your first name");
+    } else {
+        var regex = /^[a-zA-Z\s]+$/;
+        if (!regex.test(fname)) {
+            printError("fnameErr", "Please enter a valid name");
+        } else {
+            printError("fnameErr", "");
+            fnameErr = false;
+        }
+    }
+
+    // Validate Last Name
+    if (lname === "") {
+        printError("lnameErr", "Please enter your last name");
+    } else {
+        var regex = /^[a-zA-Z\s]+$/;
+        if (!regex.test(lname)) {
+            printError("lnameErr", "Please enter a valid name");
+        } else {
+            printError("lnameErr", "");
+            lnameErr = false;
+        }
+    }
+
+    // If any error found, show alert
+    if (idErr || fnameErr || lnameErr) {
+        var errorList = "Please correct the following:\n";
+        if (idErr) errorList += "- Missing ID\n";
+        if (fnameErr) errorList += "- Invalid or missing First Name\n";
+        if (lnameErr) errorList += "- Invalid or missing Last Name\n";
+        alert(errorList);
+        return false;
+    }
+
+    // If all valid, display preview and clear form
+    var preview = "Submitted Info:\n" +
+                  "ID: " + id + "\n" +
+                  "First Name: " + fname + "\n" +
+                  "Last Name: " + lname;
+    alert(preview);
+
+    // Show result below form
+    document.getElementById("result").innerHTML = 
+        "<strong>ID:</strong> " + id + "<br>" +
+        "<strong>First Name:</strong> " + fname + "<br>" +
+        "<strong>Last Name:</strong> " + lname;
+
+    // Clear form fields
+    document.myForm.reset();
+
+    return false; // prevent actual form submission
+}
+</script>
+</head>
+<body>
+
+<h2>Student Submission Form</h2>
+<form name="myForm" onsubmit="return validateForm();">
+    <div class="row">
+        <label>ID</label>
+        <input type="text" name="userID">
+        <div class="error" id="idErr"></div>
+    </div>
+
+    <div class="row">
+        <label>First Name</label>
+        <input type="text" name="firstName">
+        <div class="error" id="fnameErr"></div>
+    </div>
+
+    <div class="row">
+        <label>Last Name</label>
+        <input type="text" name="lastName">
+        <div class="error" id="lnameErr"></div>
+    </div>
+
+    <div class="row">
+        <input type="submit" value="Add">
+    </div>
+</form>
+
+<!-- Display Results Below -->
+<div id="result" style="margin-top:20px; font-weight:bold;"></div>
+
+</body>
+</html>

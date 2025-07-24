@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>In class Activity 4</title>
+  <link rel="stylesheet" href="stryle.css" />
+</head>
+
+<body>
+
+<h1> In class Activity 4: Q & A Page:</h1>
+ 
+<div class="q-block">
+<div class="question">Q-3: Load session-cookies-1.php in your browser, and read the "History Information" section near the top of the page.
+Click reload a few times, and describe what, if anything changes.</div>
+<div class="answer">ANS-3: The first time History Information section shows this “There is no record when you last visited this page previously” 
+After clicking reload a few times, It shows this = “You have visited this Web page 7 times.
+and the last visit was on Monday, July 7, 2025 at 6:16 PM” 
+So, each time the user reload or comes back to the web site it will tell you how many times you have visited the web site before and it will also tell you what time you last visited web site.
+</div>
+</div>
+
+<div class="q-block">
+<div class="question">Q-4: Go to your browser, as described in Step 2, to locate the cookie for this Web page. (If your browser does not let you view the cookie directly, ask an instructor,or friend to help you locate the file of cookies for your computer or computer account.) Describe what information is set by session-cookies-1.php.</div>
+<div class="answer">Ans-4: It stores the data as the following table 
+"LAST_VISIT	Monday%2C%20July%207%2C%202025%20at%206%3A39%20PM	2025-07-21T18:39:14.276Z	59						Medium
+VISIT_NUMBER	7"										
+The cookie takes the time of the visit as “LAST_VISIT” stores the date and time.
+And it also stores how many time the user have visited the web page as “VISIT_NUMBER” and it iterates by 1 every time the user comes to the web page again.
+</div>
+</div>
+
+<div class="q-block">
+<div class="question">Q-5: Use your browser to delete the cookie associated with session-cookis-1.php, and access that page again. Describe what appears now in the "History Information" section of that page</div>
+<div class="answer">Ans-5: After deleting the cookies, the History Information section show = “There is no record when you last visited this page previously”
+Which is the same thing as when you visited the web site for the first time.
+</div>
+</div>
+</div>
+
+<div class="q-block">
+<div class="question">Q-6: Examine what, if any, other cookies your browser has stored recently. Provide a numerical estimate of the work you have done on the Web over the past week, in other words provide a rough estimate of the fraction of your Web-based work that has yielded cookies on your computer.</div>
+<div class="answer">Ans-6:  From what the browser told me I have 67 cookies from google.com, Which I believe I got from searching and going on websites. 67 cookies from adobe.com Which I believe I got from downloading a few of the software/apps and from converting few files. 45 cookies from amazon for searching for things and opening a page for products, and many more.</div>
+</div>
+</div>
+
+<div class="q-block">
+<div class="question">Q-7: In program session-cookies-1.php, move the code segment for cookies from the beginning of the program to somewhere after the DOCTYPE line. Run the program in your browser, and describe what happens.</div>
+<div class="answer">Ans-7: After moving the code segment for cookies from the beginning of the program to the in the DOCTYPE line section. The cookies did save the data on the browser, but it did not change the “History Information” section even after refreshing multiple times still shows “There is no record when you last visited this page previously”.</div>
+</div>
+</div>
+
+<div class="q-block">
+<div class="question">Q-8: Restore the original session-cookies-1.php program. Then modify the program so that it sets a cookie for the first date the browser loads the page as well as the most recent access date.</div>
+<div class="answer">Ans-8: https://codd.cs.gsu.edu/~kpatel315/WP/IN/IN4/session-cookies-1.php</div>
+</div>
+</div>
+
+<div class="q-block">
+<div class="question">Q-9: From session-cookies-1.php, use the Try this link, and check what happens.</div>
+<div class="answer">Aan-9: When I use the “try this link” it shows <br/>
+“Authorization Failure!<br/>
+Please log in before accessing this page.”
+</div>
+</div>
+</div>
+
+<div class="q-block">
+<div class="question">Q-10: Next try supplying a password (anything except the correct password Test) in the box for session-cookies-1.php, and check what happens</div>
+<div class="answer">Ans-10: After putting a random password anything except the correct password Test, It still shows = <br/>
+“Authorization Failure!<br/>
+Please log in before accessing this page.”
+</div>
+</div>
+</div>
+
+<div class="q-block">
+<div class="question">Q-11: Reload session-cookies-1.php and check your visit count and time. Do the same for the two programs session-cookies-2.php and session-cookies-3.php change the cookies to any random number (I.E)// Set a random number for the cookie setcookie("random_number", rand(1, 100), time() + (86400 * 30), "/"); // 86400 = 1 day, even if a correct password is not given? Now explain if there is a connection with session along with a brief explaination.</div>
+<div class="answer">Ans-11: There is a connection for the $visitcount as it counts the 2 and 3 pages takes the count and increment the number from the main page(1) but when you go back to the main page the page 1 and go back to the 2 or 3 pages the visitcount does not match the original number of visit.</div>
+</div>
+</div>
+
+<div class="q-block">
+<div class="question">Q-12: Look again in the listing of cookies for your browser. What variable(s) seem to be set for session variables?
+Before going to the next steps, erase the session variable(s) in your browser.</div>
+<div class="answer">Ans-12: The variable(s) that seem to be set for session variables are LAST_VISIT, PHPSESSID, and, VISIT_NUMBER.</div>
+</div>
+</div>
+
+<div class="q-block">
+<div class="question">Q-13: Log in correctly using the Test password, and then again try the "Try this link" option. Can you use session-cookies-3.php now?</div>
+<div class="answer">Ans-13: After login correctly it shows = "Your password was correct and you are now logged in. <br/>Processing can continue."<br/> Then after going back to the main page and clicking "Try this link" it shows = "You have logged in previously, so processing can continue on this page." and it allows the user to use the "session-cookies-3.php" </div>
+</div>
+</div>
+
+<div class="q-block">
+<div class="question">Q-14: Review the code for session-cookies-1.php, session-cookies-2.php, and session-cookies-3.php, and explain how this code uses session variables to keep track whether or not a user has supplied the correct password sometime in the recent past.</div>
+<div class="answer">Ans-14: The following part "session_start();" Function and "$_SESSION['authorized']" variable keeps track of whether or not a user has supplied the correct password sometime in the recent past.
+
+</div>
+</div>
+</div>
+
+</body>
+</html

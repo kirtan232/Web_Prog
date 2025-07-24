@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Form Validation</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="form_check.js" defer></script>
+</head>
+<body>
+
+<h2>Information Form</h2>
+
+<!-- ID input section.-->
+<form id="userForm">
+  <div class="row">
+    <label for="id">ID:</label>
+    <div id="idError" class="error"></div>
+    <input type="text" id="id" name="id">
+  </div>
+
+<!-- First Name input section.-->
+  <div class="row">
+    <label for="firstName">First Name:</label>
+    <div id="firstNameError" class="error"></div> 
+    <input type="text" id="firstName" name="firstName">
+  </div>
+
+<!-- Last Name input section.-->
+  <div class="row">
+    <label for="lastName">Last Name:</label>
+    <div id="lastNameError" class="error"></div>
+    <input type="text" id="lastName" name="lastName">
+  </div>
+  
+    <input type="button" value="Add" onclick="validateForm()">   <!-- Add button -->
+
+</form>
+
+<div id="result"></div>
+
+</body>
+</html>
