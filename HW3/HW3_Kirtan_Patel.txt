@@ -1,0 +1,10 @@
+Homepage;
+https://codd.cs.gsu.edu/~kpatel315/WP/HW/HW3/index.html
+
+
+Homepage can take you the following places;
+Game 1; Guess The Number: 
+https://codd.cs.gsu.edu/~kpatel315/WP/HW/HW3/Number/num.html
+
+Game 2; Memory Game:
+https://codd.cs.gsu.edu/~kpatel315/WP/HW/HW3/Memory/memory.html
