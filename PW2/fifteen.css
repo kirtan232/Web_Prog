@@ -1,0 +1,34 @@
+
+body {
+    font-family: "Times New Roman", serif;
+    font-size: 12pt;
+    background-color: white;
+    color: black;
+}
+
+#puzzlearea {
+    position: relative;
+    width: 400px;
+    height: 400px;
+    margin: 0 auto;
+}
+
+.puzzlepiece {
+    width: 96px;
+    height: 96px;
+    border: 2px solid black;
+    font-size: 32pt;
+    position: absolute;
+    background-image: url('img/mario.png');
+    background-size: 400px 400px;
+    font-family: sans-serif;
+    text-align: center;
+    line-height: 96px;
+    cursor: pointer;
+}
+
+.movablepiece {
+    border-color: red;
+    color: #006600;
+    text-decoration: underline;
+}
