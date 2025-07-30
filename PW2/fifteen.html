@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -8,12 +7,36 @@
     <script defer src="fifteen.js"></script>
 </head>
 <body>
-    <h1>Fifteen Puzzle</h1>
-    <div id="puzzlearea"></div>
-    <div style="text-align: center; margin-top: 20px;">
-        <button id="shufflebutton">Shuffle</button>
+
+<!-- background music-->
+    <audio id="bg-music" src="audio/background.mp3" preload="auto" loop></audio>
+    <div id="music-control">
+        <button id="bg-toggle">Play Music</button>
     </div>
-    <p style="text-align: right;">
+
+<!-- Audio -->
+    <audio id="win-sound" src="audio/win.mp3" preload="auto"></audio>
+    <audio id="lose-sound" src="audio/lose.mp3" preload="auto"></audio>
+    <audio id="move-sound" src="audio/move.mp3"></audio>
+
+    <div id="overlay"></div>  <!-- blur the background during popups.-->
+    <h1>Fifteen Puzzle</h1>
+    <div id="timer">Time left: 90</div>
+    <div id="puzzlearea"></div> <!-- Display tiles -->
+
+<!--start button-->
+    <div id="controls">
+        <button id="shufflebutton" class="control"> Start </button>   <!-- Button to start or restart the game. -->
+    </div>
+
+<!-- Win or lose pop up -->
+    <div id="popup">
+        <div class="message" id="popup-message"></div>
+        <button id="popup-play-again">Play Again</button>
+    </div>
+    
+<!-- Links to HTML and CSS validators. --> 
+    <p>
         <a href="https://validator.w3.org/"><img src="https://www.w3.org/Icons/valid-html401" alt="Valid HTML"></a>
         <a href="https://jigsaw.w3.org/css-validator/"><img src="https://jigsaw.w3.org/css-validator/images/vcss" alt="Valid CSS"></a>
     </p>
