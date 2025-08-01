@@ -125,14 +125,14 @@ button:hover {
 
 #music-control button {
   position: absolute;
+  margin-top: 25px;
+  margin-left: 30px;
   background-color: rgba(128, 128, 128, 0.5);
   border: none;
   color: white;
   padding: 8px 12px;
   border-radius: 4px;
   cursor: pointer;
-  top: 85px;
-  left: 37px;
 }
 
 #controls {
@@ -144,11 +144,6 @@ button:hover {
     margin: 0 10px;
 }
 
-#home-control {
-    position: absolute;
-    margin-top: 25px;
-    margin-left: 30px;
-}
 
 #home-button {
     display: inline-block;
