@@ -2,15 +2,27 @@ window.onload = function () {
   const puzzleArea = document.getElementById("puzzlearea")   // The main area that holds all puzzle tiles.
   const tiles = []   // Array to store tile objects.
   let emptyX = 3, emptyY = 3   // Coordinates of the empty space.
-  let timeLeft = 90, timerInterval   // Countdown timer values.
+  let timeLeft = 120, timerInterval   // Countdown timer values.
   let gameEnded = false, gameStarted = false   // Game state flags.
+  let moveCount = 0; // Track number of moves.
+  let currentUserId = null; // Store current user ID
 
   // DOM elements.
   const popup = document.getElementById("popup")                    // Win/loss message popup.
   const popupMessage = document.getElementById("popup-message")     // Message content inside the popup.
   const popupPlayAgain = document.getElementById("popup-play-again") // Button to reset the game after game ends.
+  const mainMenuBtn = document.getElementById("main-menu-btn")
   const timerEl = document.getElementById("timer")                  // Timer display element.
+  const moveCountEl = document.getElementById("move-count")         // Move count display element.
   const shuffleBtn = document.getElementById("shufflebutton")       // Shuffle/start/reset game button.
+  const leaderboardBtn = document.getElementById("leaderboard-btn") // Leaderboard button.
+  const adminBtn = document.getElementById("admin-btn")             // Admin button.
+
+  // User authentication elements
+  const loggedInSection = document.getElementById("logged-in-section")
+  const guestSection = document.getElementById("guest-section")
+  const usernameDisplay = document.getElementById("username-display")
+  const logoutBtn = document.getElementById("logout-btn")
 
   const bgMusic = document.getElementById("bg-music")   // Background music audio element.
   const bgToggle = document.getElementById("bg-toggle")   // Button to toggle background music.
@@ -19,6 +31,66 @@ window.onload = function () {
   const winSound = document.getElementById("win-sound")      // Sound to play when the user wins.
   const loseSound = document.getElementById("lose-sound")    // Sound to play when the user loses.
   const moveSound = document.getElementById("move-sound")    // Sound to play when a tile is moved.
+
+  // Check user authentication status on page load
+  checkUserAuth();
+
+  // Function to check user authentication status
+  function checkUserAuth() {
+    fetch('backend/get_user_info.php')
+      .then(response => response.json())
+      .then(data => {
+        if (data.logged_in) {
+          currentUserId = data.user_id;
+          usernameDisplay.textContent = data.username;
+          loggedInSection.style.display = 'block';
+          guestSection.style.display = 'none';
+          
+          // Check if user is admin
+          checkAdminStatus();
+        } else {
+          currentUserId = null;
+          loggedInSection.style.display = 'none';
+          guestSection.style.display = 'block';
+          if (adminBtn) adminBtn.style.display = 'none';
+        }
+      })
+      .catch(error => {
+        console.error('Error checking auth status:', error);
+        currentUserId = null;
+        loggedInSection.style.display = 'none';
+        guestSection.style.display = 'block';
+        if (adminBtn) adminBtn.style.display = 'none';
+      });
+  }
+
+  // Function to check if user is admin
+  function checkAdminStatus() {
+    fetch('backend/check_admin.php')
+      .then(response => response.json())
+      .then(data => {
+        if (data.is_admin && adminBtn) {
+          adminBtn.style.display = 'inline-block';
+        } else if (adminBtn) {
+          adminBtn.style.display = 'none';
+        }
+      })
+      .catch(error => {
+        console.error('Error checking admin status:', error);
+        if (adminBtn) adminBtn.style.display = 'none';
+      });
+  }
+
+  mainMenuBtn.addEventListener("click", function () {
+    window.location.href = "index.php";
+  });
+
+  // Logout functionality
+  if (logoutBtn) {
+    logoutBtn.addEventListener("click", function () {
+      window.location.href = 'backend/logout.php';
+    });
+  }
 
   // Toggle background music on button click.
   bgToggle.addEventListener("click", function () {
@@ -31,6 +103,18 @@ window.onload = function () {
     }
   })
 
+  // Open leaderboard in new window/tab
+  leaderboardBtn.addEventListener("click", function () {
+    window.open("backend/leaderboard.php", "_blank")
+  })
+
+  // Open admin panel (if user is admin)
+  if (adminBtn) {
+    adminBtn.addEventListener("click", function () {
+      window.open("admin/admin_dashboard.php", "_blank")
+    })
+  }
+
   // Displays the popup message.
   function displayPopup(message) {
     popup.style.display = "flex"    // Show the popup.
@@ -41,10 +125,54 @@ window.onload = function () {
   window.showPopup = function (message) {
     if (/won/i.test(message)) {
       winSound.play()   // Play win sound.
+      submitGameStats(true) // Submit winning game stats
     } else {
       loseSound.play()  // Play lose sound.
+      submitGameStats(false) // Submit losing game stats
     }
     displayPopup(message)   // Show message in popup.
+  }
+
+  // Submit game statistics to the database
+  function submitGameStats(won) {
+    const timeTaken = 120 - timeLeft; // Calculate time taken
+    const gameData = {
+      user_id: currentUserId, // Use actual user ID or null for guests
+      puzzle_size: "4x4",
+      time_taken_seconds: timeTaken,
+      moves_count: moveCount,
+      background_image_id: null,
+      win_status: won
+    };
+
+    fetch('backend/submit_stats.php', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(gameData)
+    })
+    .then(response => {
+      if (!response.ok) {
+        throw new Error('Network response was not ok');
+      }
+      return response.text(); // Get as text first to handle potential HTML errors
+    })
+    .then(text => {
+      try {
+        const data = JSON.parse(text);
+        if (data.success) {
+          console.log('Game stats submitted successfully');
+        } else {
+          console.error('Error submitting game stats:', data.error);
+        }
+      } catch (e) {
+        console.error('Invalid JSON response:', text);
+      }
+    })
+    .catch(error => {
+      console.error('Error:', error);
+    });
   }
 
   // Resets the game to the starting state.
@@ -63,8 +191,10 @@ window.onload = function () {
     emptyX = 3  // Reset empty space.
     emptyY = 3
     updateMovableTiles()    // Update movable tiles' visual state.
-    timeLeft = 90   // Reset timer.
+    timeLeft = 120   // Reset timer.
     timerEl.textContent = `Time left: ${timeLeft}`
+    moveCount = 0; // Reset move count.
+    if (moveCountEl) moveCountEl.textContent = `Moves: ${moveCount}`;
     gameEnded = false
     gameStarted = false
     shuffleBtn.textContent = `Shuffle & Start`   // Reset button label.
@@ -98,8 +228,10 @@ window.onload = function () {
 
     // Start the countdown timer.
     clearInterval(timerInterval)    // Clear previous timer.
-    timeLeft = 90
+    timeLeft = 120
     timerEl.textContent = `Time left: ${timeLeft}`
+    moveCount = 0; // Reset move count on start.
+    if (moveCountEl) moveCountEl.textContent = `Moves: ${moveCount}`;
     gameEnded = false
     timerInterval = setInterval(() => {
       timeLeft--
@@ -154,6 +286,8 @@ window.onload = function () {
     emptyY = oldY
 
     if (!silent) {
+      moveCount++;
+      if (moveCountEl) moveCountEl.textContent = `Moves: ${moveCount}`;
       const soundClone = moveSound.cloneNode()  // Clone audio to allow overlaps.
       soundClone.play()     // Play move sound.
     }
@@ -183,4 +317,6 @@ window.onload = function () {
 
   // Initial visual update for movable tiles.
   updateMovableTiles()
+  // Display initial move count
+  if (moveCountEl) moveCountEl.textContent = `Moves: ${moveCount}`;
 }
